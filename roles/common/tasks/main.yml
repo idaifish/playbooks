@@ -1,0 +1,5 @@
+---
+# tasks file for common
+
+- include: "apt.yml"
+- include: "packages.yml"

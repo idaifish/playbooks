@@ -1,0 +1,81 @@
+---
+
+- name: Remove vendor's gdb
+  become: true
+  apt:
+      name: gdb
+      state: absent
+
+
+- name: Install requirements packages for gdb
+  become: true
+  apt:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - python-dev
+      - libncurses5-dev
+      - texinfo
+
+
+- name: Download latest gdb
+  shell: wget -c http://ftp.gnu.org/gnu/gdb/gdb-7.12.tar.xz && tar Jxf gdb-7.12.tar.xz
+  args:
+      chdir: /tmp
+
+
+- name: Build & Install gdb
+  become: true
+  shell: ./configure --with-python2 && make && make install
+  args:
+      chdir: /tmp/gdb-7.12
+
+
+- name: Configure gdb
+  copy:
+      src: .gdbinit
+      dest: ~/.gdbinit
+
+
+- name: Download GEF
+  when: gdb_plugin == 'gef'
+  shell: wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
+
+
+- name: Install requirements for GEF
+  when: gdb_plugin == 'gef'
+  pip:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - keystone
+      - ropgadget
+      - capstone
+
+
+- name: Download PEDA
+  when: gdb_plugin == 'peda'
+  git:
+      repo: git://github.com/longld/peda.git
+      dest: ~/.peda
+
+
+- name: Configure PEDA
+  when: gdb_plugin == 'peda'
+  shell: echo "source ~/.peda/peda.py" >> ~/.gdbinit
+
+
+- name: Install kdump
+  become: true
+  apt:
+      name: linux-crashdump
+      state: present
+  tags:
+      - kernel
+
+
+- name: Enable kdump
+  become: true
+  shell: sed -i "s/USE_KDUMP=0/USE_KDUMP=1/" /etc/default/kdump-tools
+  tags:
+      - kernel

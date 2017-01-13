@@ -1,0 +1,33 @@
+---
+
+- name: Clone Radare2
+  git:
+      repo: git://github.com/radare/radare2.git
+      dest: /tmp/radara2
+
+
+- name: Install Redare2
+  shell: sys/install.sh
+  args:
+      chdir: /tmp/radare2
+
+
+- name: Download Unicorn
+  git:
+      repo: git://github.com/unicorn-engine/unicorn.git
+      dest: /tmp/unicorn
+
+
+- name: Build & Install Unicorn
+  become: true
+  shell: ./make.sh && ./make.sh install
+  args:
+      chdir: /tmp/unicorn
+
+
+# - name: Install Klee
+#
+# - name: Install Angr
+#
+# - name: Install Z3
+#

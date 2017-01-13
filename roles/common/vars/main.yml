@@ -1,0 +1,14 @@
+---
+# vars file for common
+
+essential_packages:
+    - python-pip
+    - python-apt
+    - python-dev
+    - zsh
+    - tree
+    - tmux
+    - vim
+    - git
+    - wget
+    - curl

@@ -1,0 +1,63 @@
+---
+
+- name: Install essential packages
+  become: true
+  apt:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{essential_packages}}"
+
+
+- name: Install docker
+  become: true
+  apt:
+      name: docker-engine
+      state: present
+  tags:
+    - docker
+
+
+- name: Install Oh-My-Zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  ignore_errors: yes
+
+
+- name: Change the default shell
+  become: true
+  shell: chsh -s /bin/zsh
+
+
+- name: Configurate tmux
+  copy:
+      src: .tmux.conf
+      dest: ~/.tmux.conf
+      backup: true
+
+
+- name: Create pip directory
+  file:
+      path: ~/.pip
+      state: directory
+
+
+- name: Configurate pip
+  copy:
+      src: pip.conf
+      dest: ~/.pip/pip.conf
+
+
+- name: Clone Vundle, VIM plugin manager.
+  git:
+      repo: git://github.com/VundleVim/Vundle.vim.git
+      dest: ~/.vim/bundle/Vundle.vim
+
+
+- name: Copy vimrc
+  copy:
+      src: .vimrc
+      dest: ~/.vimrc
+      backup: true
+
+
+- name: Install preset vim plugin
+  shell: vim +PluginInstall +qall
