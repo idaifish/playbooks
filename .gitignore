@@ -1,3 +1,4 @@
 playbook.retry
 .DS_Store
 *.log
+inventory

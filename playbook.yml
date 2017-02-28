@@ -8,4 +8,4 @@
         private: no
   roles:
     - common
-    # - binary
+    - binary

@@ -2,3 +2,4 @@
 # tasks file for binary
 
 - include: debug.yml
+- include: binary_analysis.yml

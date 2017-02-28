@@ -6,6 +6,8 @@
       src: 16.04.sources.list
       dest: /etc/apt/sources.list
       backup: yes
+  tags:
+      - apt
 
 - name: Install Docker Key
   become: true
@@ -30,3 +32,5 @@
   apt:
       update_cache: yes
       #upgrade: yes
+  tags:
+      - apt

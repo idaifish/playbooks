@@ -4,18 +4,24 @@
   git:
       repo: git://github.com/radare/radare2.git
       dest: /tmp/radara2
+  tags:
+      - bin_analysis
 
 
 - name: Install Redare2
   shell: sys/install.sh
   args:
       chdir: /tmp/radare2
+  tags:
+      - bin_analysis
 
 
 - name: Download Unicorn
   git:
       repo: git://github.com/unicorn-engine/unicorn.git
       dest: /tmp/unicorn
+  tags:
+      - bin_analysis
 
 
 - name: Build & Install Unicorn
@@ -23,7 +29,9 @@
   shell: ./make.sh && ./make.sh install
   args:
       chdir: /tmp/unicorn
-
+  tags:
+      - bin_analysis
+      
 
 # - name: Install Klee
 #

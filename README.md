@@ -43,6 +43,9 @@ $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --step
 # Skip some tasks
 $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --skip-tags "kernel,docker"
 
+# Run tagged tasks
+$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --tags "debug"
+
 # List all tasks
 $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER --list-tasks
 ```
