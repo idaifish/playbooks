@@ -24,7 +24,7 @@
 
 - name: Change the default shell
   become: true
-  shell: chsh -s /bin/zsh
+  shell: chsh -s /usr/bin/zsh
 
 
 - name: Configurate tmux
