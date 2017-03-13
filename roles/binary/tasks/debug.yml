@@ -97,3 +97,12 @@
   shell: sed -i "s/USE_KDUMP=0/USE_KDUMP=1/" /etc/default/kdump-tools
   tags:
       - kernel_debug
+
+
+- name: Download Kernel Debug Symbol
+  become: true
+  apt:
+      name: linux-image-{{ ansible_kernel }}-dbgsym
+      status: present
+  tags:
+      - kernel_debug

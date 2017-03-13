@@ -1,0 +1,1 @@
+deb http://ddebs.ubuntu.com {{ ansible_lsb.codename }} main restricted universe multiverse

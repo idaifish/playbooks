@@ -9,7 +9,26 @@
   tags:
       - apt
 
-- name: Install Docker Key
+
+- name: Add Debug Symbol Repoitory
+  become: true
+  template:
+      src: ddebs.list
+      dest: /etc/apt/sources.list.d/ddebs.list
+  tags:
+       - kernel_debug
+
+
+- name: Add Debug Symbol Key
+  become: true
+  apt_key:
+      url: http://ddebs.ubuntu.com/dbgsym-release-key.asc
+      status: present
+  tags:
+      - kernel_debug
+
+
+- name: Add Docker Key
   become: true
   apt_key:
       keyserver: hkp://ha.pool.sks-keyservers.net:80
@@ -19,6 +38,7 @@
   tags:
       - docker
 
+
 - name: Add Docker Repoitory
   become: true
   copy:
@@ -26,6 +46,7 @@
       dest: /etc/apt/sources.list.d/docker.list
   tags:
       - docker
+
 
 - name: Update & Upgrade & Install preset packages
   become: true
