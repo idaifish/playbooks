@@ -10,7 +10,7 @@
       - apt
 
 
-- name: Add Debug Symbol Repoitory
+- name: Add Debug Symbol Repository
   become: true
   template:
       src: ddebs.list
@@ -23,7 +23,7 @@
   become: true
   apt_key:
       url: http://ddebs.ubuntu.com/dbgsym-release-key.asc
-      status: present
+      state: present
   tags:
       - kernel_debug
 

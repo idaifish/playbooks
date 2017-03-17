@@ -103,6 +103,6 @@
   become: true
   apt:
       name: linux-image-{{ ansible_kernel }}-dbgsym
-      status: present
+      state: present
   tags:
       - kernel_debug
