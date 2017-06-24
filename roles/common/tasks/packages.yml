@@ -27,7 +27,6 @@
 
 
 - name: Change the default shell
-  become: true
   shell: chsh -s /usr/bin/zsh
   tags:
       - preset
