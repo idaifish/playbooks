@@ -39,7 +39,7 @@
       - docker
 
 
-- name: Add Docker Repoitory
+- name: Add Docker Repository
   become: true
   copy:
       src: 16.04.docker.list
