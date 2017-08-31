@@ -13,7 +13,7 @@
 - name: Add Debug Symbol Repository
   become: true
   template:
-      src: ddebs.list
+      src: 16.04.ddebs.list
       dest: /etc/apt/sources.list.d/ddebs.list
   tags:
        - kernel_debug
