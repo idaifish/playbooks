@@ -13,7 +13,7 @@
 - name: Install docker
   become: true
   apt:
-      name: docker-engine
+      name: docker-ce
       state: present
   tags:
       - docker
