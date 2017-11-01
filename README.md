@@ -1,7 +1,7 @@
 Playbooks
 =========
 
-> Automation Setup for my virtual machines.(only tested on Ubuntu16.04)
+> Automation scripts for my virtual machines. (only tested on Ubuntu16.04)
 
 
 Roles
@@ -9,7 +9,7 @@ Roles
 
 - common
     - System Update & Upgrade
-    - Install Apps(oh-my-zsh, vim, docker, etc.)
+    - Install Apps (oh-my-zsh, vim, docker, etc.)
     - Configure Environment
 - binary
     - Debug
@@ -43,7 +43,7 @@ $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --step
 # Skip some tasks
 $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --skip-tags "kernel,docker"
 
-# Run tagged tasks
+# Run specific tasks
 $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --tags "debug"
 
 # List all tasks
