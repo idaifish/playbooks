@@ -2,4 +2,5 @@
 # tasks file for common
 
 - include: "apt.yml"
-- include: "packages.yml"
+- include: "essentials.yml"
+- include: "services.yml"

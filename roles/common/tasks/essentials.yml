@@ -10,15 +10,6 @@
       - preset
 
 
-- name: Install docker
-  become: true
-  apt:
-      name: docker-ce
-      state: present
-  tags:
-      - docker
-
-
 - name: Install Oh-My-Zsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   ignore_errors: yes
@@ -49,7 +40,7 @@
       - preset
 
 
-- name: Configurate pip
+- name: Configure pip
   copy:
       src: pip.conf
       dest: ~/.pip/pip.conf

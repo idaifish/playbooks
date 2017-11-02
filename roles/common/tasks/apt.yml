@@ -8,6 +8,8 @@
       backup: yes
   tags:
       - apt
+  notify:
+      - apt_update
 
 
 - name: Add Debug Symbol Repository
@@ -17,6 +19,8 @@
       dest: /etc/apt/sources.list.d/ddebs.list
   tags:
        - kernel_debug
+  notify:
+      - apt_update
 
 
 - name: Add Debug Symbol Key
@@ -44,12 +48,5 @@
       state: present
   tags:
       - docker
-
-
-- name: Update & Upgrade & Install preset packages
-  become: true
-  apt:
-      update_cache: yes
-      #upgrade: yes
-  tags:
-      - apt
+  notify:
+      - apt_update

@@ -4,7 +4,7 @@
   vars_prompt:
       - name: "gdb_plugin"
         prompt: "What is your favorite gdb plugin(gef or peda)?"
-        default: "gef"
+        default: "peda"
         private: no
   roles:
     - common

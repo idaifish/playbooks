@@ -1,0 +1,9 @@
+---
+
+- name: Install docker
+  become: true
+  apt:
+      name: docker-ce
+      state: present
+  tags:
+      - docker

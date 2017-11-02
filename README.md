@@ -8,9 +8,9 @@ Roles
 -----
 
 - common
-    - System Update & Upgrade
-    - Install Apps (oh-my-zsh, vim, docker, etc.)
-    - Configure Environment
+    - apt: System Update & Upgrade
+    - essentials: Install Apps & Configure Environment
+    - services: Install Services
 - binary
     - Debug
     - Binary Analysis
