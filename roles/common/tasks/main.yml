@@ -1,6 +1,6 @@
 ---
 # tasks file for common
 
-- include: "apt.yml"
-- include: "essentials.yml"
-- include: "services.yml"
+- import_tasks: "apt.yml"
+- import_tasks: "essentials.yml"
+- import_tasks: "services.yml"

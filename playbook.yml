@@ -1,11 +1,6 @@
 ---
 
 - hosts: ubuntu
-  vars_prompt:
-      - name: "gdb_plugin"
-        prompt: "What is your favorite gdb plugin(gef or peda)?"
-        default: "peda"
-        private: no
   roles:
     - common
     - binary

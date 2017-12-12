@@ -1,6 +1,6 @@
 ---
 
-- name: Install docker
+- name: Install Docker-CE
   become: true
   apt:
       name: docker-ce

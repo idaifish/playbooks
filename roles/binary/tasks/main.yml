@@ -1,5 +1,5 @@
 ---
 # tasks file for binary
 
-- include: debug.yml
-- include: binary_analysis.yml
+- import_tasks: debug.yml
+- import_tasks: binary_analysis.yml
