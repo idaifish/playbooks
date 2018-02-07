@@ -1,7 +1,7 @@
 ---
 # handlers file for common
 
-- name: Apt Update
+- name: apt_update
   become: true
   apt:
       update_cache: yes
