@@ -12,3 +12,4 @@ essential_packages:
     - git
     - wget
     - curl
+    - unzip

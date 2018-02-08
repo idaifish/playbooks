@@ -99,7 +99,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'tpope/vim-rails.git'
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'mattn/emmet-vim'
+"Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/syntastic'

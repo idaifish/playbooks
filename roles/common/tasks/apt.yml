@@ -14,39 +14,31 @@
 
 - name: Add Debug Symbol Repository
   become: true
-  template:
-      src: 16.04.ddebs.list
-      dest: /etc/apt/sources.list.d/ddebs.list
+  block:
+      - template:
+          src: 16.04.ddebs.list
+          dest: /etc/apt/sources.list.d/ddebs.list
+      - apt_key:
+          url: http://ddebs.ubuntu.com/dbgsym-release-key.asc
+          state: present
+      - apt:
+          update_cache: yes
+
   tags:
        - kernel_debug
-  notify:
-      - apt_update
-
-
-- name: Add Debug Symbol Key
-  become: true
-  apt_key:
-      url: http://ddebs.ubuntu.com/dbgsym-release-key.asc
-      state: present
-  tags:
-      - kernel_debug
-
-
-- name: Add the GPG key for the official Docker repository
-  become: true
-  apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
-  tags:
-      - docker
+       - debug
 
 
 - name: Add Docker Repository
   become: true
-  apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
-      state: present
+  block:
+      - apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+      - apt_repository:
+          repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+          state: present
+      - apt:
+          update_cache: yes
   tags:
       - docker
-  notify:
-      - apt_update

@@ -1,9 +1,17 @@
 ---
 
-- name: Install Docker-CE
+- name: Install Docker-CE and docker-compose
   become: true
-  apt:
-      name: docker-ce
-      state: present
+  block:
+      - apt:
+          name: docker-ce
+          state: present
+      - user:
+          name: "{{ ansible_user }}"
+          groups: docker
+          append: yes
+      - pip:
+          name: docker-compose
+          umask: 0022
   tags:
       - docker
