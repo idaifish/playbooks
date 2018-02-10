@@ -3,15 +3,18 @@
 - name: Install Docker-CE and docker-compose
   become: true
   block:
-      - apt:
+      - name: Install docker-ce
+        apt:
           name: docker-ce
           state: present
-      - user:
+      - name: Append user into docker group
+        user:
           name: "{{ ansible_user }}"
           groups: docker
           append: yes
-      - pip:
+      - name: Install docker-compose
+        pip:
           name: docker-compose
-          umask: 0022
+          umask: "0022"
   tags:
       - docker

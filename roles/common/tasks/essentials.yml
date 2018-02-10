@@ -12,32 +12,46 @@
 
 - name: Configure essential essential packages
   block:
-      - copy:
+      - name: Configure tmux
+        copy:
           src: .tmux.conf
           dest: ~/.tmux.conf
           backup: true
-      - file:
+      - name: Configure pip directory
+        file:
           path: ~/.pip
           state: directory
-      - copy:
+      - name: Configure pip mirrors
+        copy:
           src: pip.conf
           dest: ~/.pip/pip.conf
-      - git:
+      - name: Configure vim plugin repository
+        git:
           repo: git://github.com/VundleVim/Vundle.vim.git
           dest: ~/.vim/bundle/Vundle.vim
-      - copy:
+      - name: Configure vim
+        copy:
           src: .vimrc
           dest: ~/.vimrc
           backup: true
-      - shell: vim +PluginInstall +qall
+      - name: Install vim plugin
+        shell: vim +PluginInstall +qall
   tags:
       - preset
 
 
 - name: Install Oh-My-Zsh
   block:
-      - shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-      - shell: chsh -s /usr/bin/zsh
-  ignore_errors: yes
+      #- shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+      - name: Download oh-my-zsh
+        get_url:
+          url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+          dest: /tmp/install-oh-my-zsh.sh
+          mode: 0700
+      - name: Install oh-my-zsh
+        shell: sh -c /tmp/install-oh-my-zsh.sh
+      - name: Change default shell to zsh
+        shell: chsh -s /usr/bin/zsh
+  #ignore_errors: yes
   tags:
       - preset
