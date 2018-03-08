@@ -1,0 +1,23 @@
+---
+
+name: my-filebeat
+tags: ["tag"]
+reload.enabled: true
+reload.period: 10s
+
+filebeat.prospectors:
+    - type: log
+      enabled: true
+      paths:
+          - /var/log/sth.log
+
+filebeat.config.modules:
+    path: ${path.config}/modules.d/*.yml
+
+output.logstash:
+    hosts: ["logstash:5044"]
+
+# output.console:
+#     pretty: true
+
+logging.level: info
