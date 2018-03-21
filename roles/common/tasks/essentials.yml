@@ -50,8 +50,11 @@
           mode: 0700
       - name: Install oh-my-zsh
         shell: sh -c /tmp/install-oh-my-zsh.sh
-      - name: Change default shell to zsh
-        shell: chsh -s /usr/bin/zsh
+        ignore_errors: yes
+      - debug:
+          msg: "Change default shell: chsh -s /usr/bin/zsh"
+      # - name: Change default shell to zsh
+      #   shell: chsh -s /usr/bin/zsh
   #ignore_errors: yes
   tags:
       - preset

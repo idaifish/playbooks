@@ -35,16 +35,16 @@ Usage
 2. Run command
 
 ```bash
-$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K
+$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K -k
 
 # Interactive
-$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --step
+$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K -k --step
 
 # Skip some tasks
-$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --skip-tags "kernel,docker"
+$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K -k --skip-tags "kernel,docker"
 
 # Run specific tasks
-$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K --tags "debug"
+$ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER -K -k --tags "debug"
 
 # List all tasks
 $ ansible-playbook playbook.yml -i inventory --user=$REMOTE_USER --list-tasks
