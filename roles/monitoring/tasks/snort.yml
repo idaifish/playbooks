@@ -1,0 +1,12 @@
+---
+
+- name: Configure Snort
+  become: true
+  tags:
+    - snort
+  block:
+    - name: Install Snort
+      apt:
+        name: snort
+        state: present
+        update_cache: yes

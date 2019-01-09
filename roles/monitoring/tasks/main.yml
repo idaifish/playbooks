@@ -1,2 +1,5 @@
 ---
 # tasks file for monitoring
+
+- import_tasks: "auditd.yml"
+- import_tasks: "snort.yml"

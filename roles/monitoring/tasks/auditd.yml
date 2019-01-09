@@ -1,0 +1,22 @@
+---
+
+- name: Configure auditd
+  become: true
+  block:
+    - name: Install auditd
+      apt:
+        name: auditd
+        state: present
+    - name: Copy audit.rules
+      copy:
+        src: audit/audit.rules
+        dest: /etc/audit/audit.rules
+        mode: 640
+        owner: root
+    - name: Restart auditd
+      service:
+        name: auditd
+        state: restarted
+  tags:
+      - auditd
+

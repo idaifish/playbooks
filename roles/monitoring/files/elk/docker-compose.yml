@@ -10,7 +10,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-      - /opt/es_data:/usr/share/elasticsearch/data
+      - es-data:/usr/share/elasticsearch/data
     ports:
       - "127.0.0.1:9200:9200"
       - "9300:9300"
@@ -57,3 +57,6 @@ networks:
   elk:
     name: elk
     driver: bridge
+
+volumes:
+  es-data:
