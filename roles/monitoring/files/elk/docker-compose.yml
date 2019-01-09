@@ -1,4 +1,4 @@
-version: '2'
+version: '2.3'
 
 services:
 
@@ -6,35 +6,35 @@ services:
     container_name: elasticsearch
     build:
       context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - /opt/es_data:/usr/share/elasticsearch/data
     ports:
-      - "9200:9200"
+      - "127.0.0.1:9200:9200"
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx2g -Xms2g"
     networks:
-      elk:
-          aliases:
-              - "elasticsearch"
+      - elk
 
   logstash:
     container_name: logstash
     build:
       context: logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline
       - ./logstash/pipelines.yml:/usr/share/logstash/pipelines.yml:ro
     ports:
-      - "5044:5044"
+      - "5043-5050:5043-5050"
     environment:
       LS_JAVA_OPTS: "-Xmx1g -Xms1g"
     networks:
-      elk:
-          aliases:
-              - "logstash"
+      - elk
     depends_on:
       - elasticsearch
 
@@ -42,18 +42,18 @@ services:
     container_name: kibana
     build:
       context: kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
-      elk:
-          aliases:
-              - "kibana"
+      - elk
     depends_on:
       - elasticsearch
 
 networks:
   elk:
-    # docker network create -d bridge -o "com.docker.network.bridge.name=docker-elk"  elk
-    external: true
+    name: elk
+    driver: bridge

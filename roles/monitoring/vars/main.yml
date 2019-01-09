@@ -1,0 +1,5 @@
+---
+# vars file for monitoring
+
+# Ref: https://www.docker.elastic.co/
+elastic_stack_version: 6.4.2
